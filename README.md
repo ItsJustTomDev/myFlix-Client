@@ -1,3 +1,3 @@
 # MyFlix Client side
 
-- Added file structure and added all files.
+This is myFlix client side application
