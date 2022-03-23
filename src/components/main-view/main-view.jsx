@@ -21,7 +21,7 @@ const MainView = () => {
       });
   }, []);
 
-  if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+  if (!user) return <LoginView onLoggedIn={(user) => setUser(user)} />;
 
   if (movies.length === 0)
     return <div className="main-view">The list is empty!</div>;
