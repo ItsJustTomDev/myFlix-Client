@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function RegistrationView() {
+function RegistrationView({ onRegistration }) {
   const [regUsername, setRegUsername] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const [regEmail, setRegEmail] = useState("");
@@ -8,7 +8,7 @@ function RegistrationView() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(regUsername, regPassword);
-    onLoggedIn(regUsername);
+    onRegistration(regUsername);
   };
 
   return (
@@ -44,5 +44,9 @@ function RegistrationView() {
     </form>
   );
 }
+
+RegistrationView.propTypes = {
+  onRegistration: PropTypes.func.isRequired,
+};
 
 export default RegistrationView;
