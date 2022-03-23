@@ -9,6 +9,7 @@ import {
   Row,
 } from "react-bootstrap";
 import PropTypes from "prop-types";
+import "./login-view.scss";
 
 function LoginView({ onLoggedIn }) {
   const [username, setUsername] = useState("");
@@ -24,8 +25,8 @@ function LoginView({ onLoggedIn }) {
     <Container>
       <Row>
         <Col>
-          <CardGroup>
-            <Card>
+          <CardGroup className="test2">
+            <Card className="test">
               <Card.Body>
                 <Card.Title>Login Page</Card.Title>
                 <Form>
@@ -48,7 +49,7 @@ function LoginView({ onLoggedIn }) {
                       placeholder="Enter a password"
                     />
                   </Form.Group>
-                  <Button
+                  <Button className="login-button"
                     variant="primary"
                     type="submit"
                     onClick={handleSubmit}
