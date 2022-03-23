@@ -4,6 +4,7 @@ import MovieView from "../movie-view/movie-view";
 import LoginView from "../login-view/login-view";
 import RegistrationView from "../registration-view/registration-view";
 import axios from "axios";
+import { Container, Col, Row } from "react-bootstrap";
 
 const MainView = () => {
   const [movies, setMovies] = useState([]);
@@ -27,26 +28,30 @@ const MainView = () => {
     return <div className="main-view">The list is empty!</div>;
 
   return (
-    <div className="main-view">
+    <Row className="main-view justify-content-md-center">
       {selectedMovie ? (
-        <MovieView
-          movie={selectedMovie}
-          onBackClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
-          }}
-        />
-      ) : (
-        movies.map((movie) => (
-          <MovieCard
-            key={movie._id}
-            movie={movie}
-            onMovieClick={(movie) => {
-              setSelectedMovie(movie);
+        <Col md={8}>
+          <MovieView
+            movie={selectedMovie}
+            onBackClick={(newSelectedMovie) => {
+              setSelectedMovie(newSelectedMovie);
             }}
           />
+        </Col>
+      ) : (
+        movies.map((movie) => (
+          <Col md={3}>
+            <MovieCard
+              key={movie._id}
+              movie={movie}
+              onMovieClick={(newSelectedMovie) => {
+                setSelectedMovie(newSelectedMovie);
+              }}
+            />
+          </Col>
         ))
       )}
-    </div>
+    </Row>
   );
 };
 
