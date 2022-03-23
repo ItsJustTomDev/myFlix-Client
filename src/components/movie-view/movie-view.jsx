@@ -1,5 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Button } from "react-bootstrap";
+
+import "./movie-view.scss";
 
 const MovieView = ({ movie, onBackClick }) => {
   return (
@@ -15,13 +18,13 @@ const MovieView = ({ movie, onBackClick }) => {
         <span className="label">Description: </span>
         <span className="value">{movie.Description}</span>
       </div>
-      <button
+      <Button
         onClick={() => {
           onBackClick(null);
         }}
       >
         Back
-      </button>
+      </Button>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import LoginView from "../login-view/login-view";
 import RegistrationView from "../registration-view/registration-view";
 import axios from "axios";
 import { Container, Col, Row } from "react-bootstrap";
+import "./main-view.scss";
 
 const MainView = () => {
   const [movies, setMovies] = useState([]);
@@ -40,9 +41,8 @@ const MainView = () => {
         </Col>
       ) : (
         movies.map((movie) => (
-          <Col md={3}>
+          <Col key={movie._id} md={3} className="movie-column">
             <MovieCard
-              key={movie._id}
               movie={movie}
               onMovieClick={(newSelectedMovie) => {
                 setSelectedMovie(newSelectedMovie);

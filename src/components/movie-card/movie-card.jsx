@@ -6,11 +6,13 @@ import "./movie-card.scss";
 
 const MovieCard = ({ movie, onMovieClick }) => {
   return (
-    <Card>
+    <Card className="movie-card">
       <Card.Img variant="top" src={movie.ImagePath} />
-      <Card.Body>
+      <Card.Body className="movie-card-body">
         <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Description}</Card.Text>
+        <Card.Text className="movie-card-description">
+          {movie.Description}
+        </Card.Text>
         <Button onClick={() => onMovieClick(movie)} variant="link">
           Open
         </Button>

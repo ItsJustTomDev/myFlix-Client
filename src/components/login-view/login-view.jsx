@@ -25,8 +25,8 @@ function LoginView({ onLoggedIn }) {
     <Container>
       <Row>
         <Col>
-          <CardGroup className="test2">
-            <Card className="test">
+          <CardGroup className="login-card-group">
+            <Card className="login-card">
               <Card.Body>
                 <Card.Title>Login Page</Card.Title>
                 <Form>
@@ -49,13 +49,15 @@ function LoginView({ onLoggedIn }) {
                       placeholder="Enter a password"
                     />
                   </Form.Group>
-                  <Button className="login-button"
+                  <Button
+                    className="login-button"
                     variant="primary"
                     type="submit"
                     onClick={handleSubmit}
                   >
                     Submit
                   </Button>
+                  <Button className="login-button left">Register Now</Button>
                 </Form>
               </Card.Body>
             </Card>
