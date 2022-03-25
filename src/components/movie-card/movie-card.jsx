@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./movie-card.scss";
+import { Link } from "react-router-dom";
 
-const MovieCard = ({ movie, onMovieClick }) => {
+const MovieCard = ({ movie }) => {
   return (
     <Card className="movie-card">
       <Card.Img variant="top" src={movie.ImagePath} />
@@ -13,9 +14,9 @@ const MovieCard = ({ movie, onMovieClick }) => {
         <Card.Text className="movie-card-description">
           {movie.Description}
         </Card.Text>
-        <Button onClick={() => onMovieClick(movie)} variant="link">
-          Open
-        </Button>
+        <Link to={`/movies/${movie._id}`}>
+          <Button variant="primary">Open</Button>
+        </Link>
       </Card.Body>
     </Card>
   );
