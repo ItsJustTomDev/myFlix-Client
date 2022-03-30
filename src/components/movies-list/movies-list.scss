@@ -1,0 +1,18 @@
+$text-size: 1em;
+$title-size: 1.3em;
+$brand-size: 2em;
+$font-style: 400;
+$text-color: white;
+$bg-color: #1e2127;
+$red: #da1212;
+
+.search-bar {
+  margin-bottom: 1em;
+  color: $text-color !important;
+  padding-right: 0;
+}
+
+.movie-cards {
+  display: flex;
+  align-items: stretch;
+}

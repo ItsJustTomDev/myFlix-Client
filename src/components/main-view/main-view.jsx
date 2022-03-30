@@ -13,8 +13,10 @@ import ProfileView from "../profile-view/profile-view";
 import GenreView from "../genre-view/genre-view";
 import DirectorView from "../director-view/director-view";
 
-const MainView = () => {
-  const [movies, setMovies] = useState([]);
+import { connect } from "react-redux";
+import { setMovies } from "../../actions/actions";
+
+const MainView = ({ movies, user }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -206,4 +208,8 @@ const MainView = () => {
   );
 };
 
-export default MainView;
+let mapStateToProps = (state) => {
+  return { movies: state.movies };
+};
+
+export default connect(mapStateToProps, { setMovies })(MainView);

@@ -37,7 +37,7 @@ function RegistrationView() {
       setPasswordErr("Password required");
       isReq = false;
     } else if (regPassword.length < 6) {
-      setRegPassword("Password must be at least 6 characters long");
+      setPasswordErr("Password must be at least 6 characters long");
       isReq = false;
     }
     if (!regEmail) {

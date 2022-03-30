@@ -127,7 +127,6 @@ function ProfileView({ movies, onBackClick }) {
                     type="text"
                     name="Username"
                     placeholder="New Username"
-                    value={userUsername}
                     onChange={(e) => setUsername(e.target.value)}
                     required
                   />
@@ -138,7 +137,6 @@ function ProfileView({ movies, onBackClick }) {
                   <Form.Control
                     type="password"
                     name="Password"
-                    value={password}
                     placeholder="New Password"
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -150,7 +148,6 @@ function ProfileView({ movies, onBackClick }) {
                   <Form.Control
                     type="email"
                     name="Email"
-                    value={email}
                     placeholder="Enter Email"
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -216,7 +213,6 @@ function ProfileView({ movies, onBackClick }) {
                           <Button
                             size="sm"
                             variant="danger"
-                            value={movie._id}
                             onClick={(e) => RemoveFavoriteMovie(e, movie)}
                           >
                             Remove

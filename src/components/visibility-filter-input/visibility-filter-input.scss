@@ -1,0 +1,20 @@
+$text-size: 1em;
+$title-size: 1.3em;
+$brand-size: 2em;
+$font-style: 400;
+$text-color: white;
+$bg-color: #1e2127;
+$red: #da1212;
+
+.form-label {
+  font-size: $title-size !important;
+}
+
+.search-bar-container {
+  padding: 0 !important;
+}
+
+.search-bar-input:focus {
+  box-shadow: none !important;
+  border-color: $red !important;
+}

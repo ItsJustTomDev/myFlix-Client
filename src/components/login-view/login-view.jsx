@@ -16,9 +16,9 @@ import { Link } from "react-router-dom";
 function LoginView({ onLoggedIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // Declare hook for each input
   const [usernameErr, setUsernameErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
+  const [globalErr, setGlobalErr] = useState("");
 
   // validate user inputs
   const validate = () => {
@@ -53,9 +53,10 @@ function LoginView({ onLoggedIn }) {
         .then((response) => {
           const data = response.data;
           onLoggedIn(data);
+          window.open("/", "_self");
         })
         .catch((e) => {
-          console.log("no such user");
+          setGlobalErr("No user has been found");
         });
     }
   };
@@ -70,6 +71,7 @@ function LoginView({ onLoggedIn }) {
                 <Card.Title>Login Page</Card.Title>
                 <Form>
                   <Form.Group controlId="formUsername">
+                    {globalErr && <p>{globalErr}</p>}
                     <Form.Label>Username:</Form.Label>
                     <Form.Control
                       type="text"
