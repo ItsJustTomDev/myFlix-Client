@@ -16,7 +16,7 @@ import DirectorView from "../director-view/director-view";
 import { connect } from "react-redux";
 import { setMovies } from "../../actions/actions";
 
-const MainView = ({ movies, user }) => {
+const MainView = ({ movies }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
