@@ -16,7 +16,8 @@ import DirectorView from "../director-view/director-view";
 import { connect } from "react-redux";
 import { setMovies } from "../../actions/actions";
 
-const MainView = ({ movies }) => {
+const MainView = () => {
+  const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -208,8 +209,4 @@ const MainView = ({ movies }) => {
   );
 };
 
-let mapStateToProps = (state) => {
-  return { movies: state.movies };
-};
-
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default MainView;

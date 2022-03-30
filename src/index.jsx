@@ -2,14 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import MainView from "./components/main-view/main-view";
 import Container from "react-bootstrap/Container";
+import movieApp from './reducers/reducers';
+
 
 import { createStore } from "redux";
-import { Prrovider } from "react-redux";
+import { Provider } from "react-redux";
 
 // Import statement to indicate that you need to bundle `./index.scss`
 import "./index.scss";
 
-const store = createStore(moviesApp);
+const store = createStore(movieApp);
 
 // Main component (will eventually use all the others)
 const MyFlixApplication = () => {
