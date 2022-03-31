@@ -64,7 +64,6 @@ function ProfileView({ movies, onBackClick }) {
 
     localStorage.setItem("user", userUsername);
     alert("Profile updated successfully");
-    window.open("/profile", "_self");
   };
 
   const RemoveFavoriteMovie = (e, movie) => {
@@ -227,14 +226,9 @@ function ProfileView({ movies, onBackClick }) {
         </Col>
       </Row>
       <div className="backButton">
-        <Button
-          variant="primary"
-          onClick={() => {
-            onBackClick(null);
-          }}
-        >
-          Back
-        </Button>
+        <Link to="/">
+          <Button variant="primary">Back</Button>
+        </Link>
       </div>
       <br />
     </Container>

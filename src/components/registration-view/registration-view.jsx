@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   Button,
@@ -13,38 +13,56 @@ import "./registration-view.scss";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-function RegistrationView() {
-  const [regUsername, setRegUsername] = useState("");
-  const [regPassword, setRegPassword] = useState("");
-  const [regEmail, setRegEmail] = useState("");
-  const [regBirthday, setRegBirthday] = useState("");
+// Redux
+import { setUser, validateInput } from "../../actions/actions";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+function RegistrationView({ user, setUser, validateInput }) {
   const [usernameErr, setUsernameErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
   const [emailErr, setEmailErr] = useState("");
+
+  useEffect(() => {
+    setUser({
+      Username: "",
+      Password: "",
+      Email: "",
+      Birthday: "",
+      FavoriteMovies: [],
+    });
+  }, []);
 
   // validate user inputs
   const validate = () => {
     let isReq = true;
 
-    if (!regUsername) {
-      setUsernameErr("Username required");
+    if (!user.Username) {
+      setUsernameErr("Username is required (at least 4 characters).");
       isReq = false;
-    } else if (regUsername.length < 2) {
-      setUsernameErr("Username must be at least 2 characters long");
-      isReq = false;
-    }
-    if (!regPassword) {
-      setPasswordErr("Password required");
-      isReq = false;
-    } else if (regPassword.length < 6) {
-      setPasswordErr("Password must be at least 6 characters long");
+    } else if (user.Username.length < 4) {
+      setUsernameErr("Username must be at least 4 characters long.");
       isReq = false;
     }
-    if (!regEmail) {
-      setEmailErr("Email required");
+
+    if (!user.Password) {
+      setPasswordErr("Password is required (at least 6 characters).");
       isReq = false;
-    } else if (regEmail.indexOf("@") === -1) {
-      setRegEmail("Email must be valid");
+    } else if (user.Password.length < 6) {
+      setPasswordErr("Password must be at least 6 characters long.");
+      isReq = false;
+    }
+
+    if (!user.Email) {
+      setEmailErr("Email is required.");
+      isReq = false;
+    } else if (user.Email.indexOf("@") === -1) {
+      setEmailErr("Email is not valid.");
       isReq = false;
     }
 
@@ -57,10 +75,10 @@ function RegistrationView() {
     if (isReq) {
       axios
         .post("https://secret-mesa-82091.herokuapp.com/users", {
-          Username: regUsername,
-          Password: regPassword,
-          Email: regEmail,
-          Birthday: regBirthday,
+          Username: user.Username,
+          Password: user.Password,
+          Email: user.Email,
+          Birthday: user.Birthday,
         })
         .then((response) => {
           const data = response.data;
@@ -87,7 +105,9 @@ function RegistrationView() {
                     <Form.Label>Username:</Form.Label>
                     <Form.Control
                       type="text"
-                      onChange={(e) => setRegUsername(e.target.value)}
+                      onChange={(e) =>
+                        validateInput(e.target.value, "Username")
+                      }
                       required
                       placeholder="Enter a username"
                     />
@@ -98,7 +118,9 @@ function RegistrationView() {
                     <Form.Label>Password:</Form.Label>
                     <Form.Control
                       type="password"
-                      onChange={(e) => setRegPassword(e.target.value)}
+                      onChange={(e) =>
+                        validateInput(e.target.value, "Password")
+                      }
                       required
                       placeholder="Enter a password"
                     />
@@ -108,7 +130,7 @@ function RegistrationView() {
                     <Form.Label>Email Adress:</Form.Label>
                     <Form.Control
                       type="email"
-                      onChange={(e) => setRegEmail(e.target.value)}
+                      onChange={(e) => validateInput(e.target.value, "Email")}
                       required
                       placeholder="Enter a Email"
                     />
@@ -117,7 +139,9 @@ function RegistrationView() {
                   <Form.Group controlId="formBirthday">
                     <Form.Label>Birthday</Form.Label>
                     <Form.Control
-                      onChange={(e) => setRegBirthday(e.target.value)}
+                      onChange={(e) =>
+                        validateInput(e.target.value, "Birthday")
+                      }
                       required
                       placeholder="Enter birthday"
                       type="date"
@@ -147,12 +171,16 @@ function RegistrationView() {
 }
 
 RegistrationView.propTypes = {
-  register: PropTypes.shape({
+  users: PropTypes.shape({
     Username: PropTypes.string.isRequired,
     Password: PropTypes.string.isRequired,
     Email: PropTypes.string.isRequired,
+    Birthday: PropTypes.string.isRequired,
   }),
-  onRegistration: PropTypes.func,
+  setUser: PropTypes.func,
+  validateInput: PropTypes.func,
 };
 
-export default RegistrationView;
+export default connect(mapStateToProps, { setUser, validateInput })(
+  RegistrationView
+);

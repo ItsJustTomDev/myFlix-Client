@@ -2,7 +2,9 @@ import React from "react";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import "./navbar-view.scss";
 
-export function NavbarView({ user }) {
+export function NavbarView() {
+  const user = localStorage.getItem("user");
+
   const onLoggedOut = () => {
     localStorage.clear();
     window.open("/", "_self");
@@ -28,7 +30,7 @@ export function NavbarView({ user }) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            {isAuth() && <Nav.Link href="/profile">{user}</Nav.Link>}
+            {isAuth() && <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>}
             {isAuth() && (
               <Button
                 variant="link"

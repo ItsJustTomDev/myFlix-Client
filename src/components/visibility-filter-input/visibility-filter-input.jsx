@@ -4,7 +4,7 @@ import { Form, Row, Col } from "react-bootstrap";
 import { setFilter } from "../../actions/actions";
 import "./visibility-filter-input.scss";
 
-function VisibilityFilterInput(props) {
+function VisibilityFilterInput({ setFilter, visibilityFilter }) {
   return (
     <Form>
       <Form.Group as={Row}>
@@ -12,8 +12,8 @@ function VisibilityFilterInput(props) {
         <Col className="search-bar-col">
           <Form.Control
             className="search-bar-input"
-            onChange={(e) => props.setFilter(e.target.value)}
-            value={props.visibilityFilter}
+            onChange={(e) => setFilter(e.target.value)}
+            value={visibilityFilter}
             placeholder="Movie Title "
           />
         </Col>

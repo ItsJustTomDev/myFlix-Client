@@ -8,7 +8,9 @@ export const SET_FILTER = "SET_FILTER";
 /* Users */
 
 export const SET_USER = "SET_USER";
+
 export const VALIDATE_INPUT = "VALIDATE_INPUT";
+
 export const CHANGE_FAVORITES = "CHANGE_FAVORITES";
 
 /* // ACTION CREATORS // */

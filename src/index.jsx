@@ -2,8 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import MainView from "./components/main-view/main-view";
 import Container from "react-bootstrap/Container";
-import movieApp from './reducers/reducers';
-
+import movieApp from "./reducers/reducers";
 
 import { createStore } from "redux";
 import { Provider } from "react-redux";

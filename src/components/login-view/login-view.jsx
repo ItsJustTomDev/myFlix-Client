@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   Button,
@@ -13,32 +13,37 @@ import PropTypes from "prop-types";
 import "./login-view.scss";
 import { Link } from "react-router-dom";
 
-function LoginView({ onLoggedIn }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+// Redux
+import { connect } from "react-redux";
+import { setUser, validateInput } from "../../actions/actions";
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+function LoginView({ user, setUser, validateInput, onLoggedIn }) {
   const [usernameErr, setUsernameErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
   const [globalErr, setGlobalErr] = useState("");
 
+  useEffect(() => {
+    setUser({ Username: "", Password: "" });
+  }, []);
+
   // validate user inputs
   const validate = () => {
-    let isReq = true;
-    if (!username) {
-      setUsernameErr("Username Required");
-      isReq = false;
-    } else if (username.length < 2) {
-      setUsernameErr("Username must be 2 characters long");
-      isReq = false;
+    let isValid = true;
+    if (!user.Username) {
+      setUsernameErr("Username is required.");
+      isValid = false;
     }
-    if (!password) {
-      setPasswordErr("Password Required");
-      isReq = false;
-    } else if (password.length < 6) {
-      setPassword("Password must be 6 characters long");
-      isReq = false;
+    if (!user.Password) {
+      setPasswordErr("Password is required.");
+      isValid = false;
     }
-
-    return isReq;
+    return isValid;
   };
 
   const handleSubmit = (e) => {
@@ -47,8 +52,8 @@ function LoginView({ onLoggedIn }) {
     if (isReq) {
       axios
         .post("https://secret-mesa-82091.herokuapp.com/login", {
-          Username: username,
-          Password: password,
+          Username: user.Username,
+          Password: user.Password,
         })
         .then((response) => {
           const data = response.data;
@@ -75,7 +80,9 @@ function LoginView({ onLoggedIn }) {
                     <Form.Label>Username:</Form.Label>
                     <Form.Control
                       type="text"
-                      onChange={(e) => setUsername(e.target.value)}
+                      onChange={(e) =>
+                        validateInput(e.target.value, "Username")
+                      }
                       required
                       placeholder="Enter a username"
                     />
@@ -86,7 +93,9 @@ function LoginView({ onLoggedIn }) {
                     <Form.Label>Password:</Form.Label>
                     <Form.Control
                       type="password"
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e) =>
+                        validateInput(e.target.value, "Password")
+                      }
                       required
                       placeholder="Enter a password"
                     />
@@ -114,11 +123,13 @@ function LoginView({ onLoggedIn }) {
 }
 
 LoginView.propTypes = {
+  onLoggedIn: PropTypes.func,
+  validateInput: PropTypes.func,
+  setUser: PropTypes.func,
   user: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
   }),
-  onLoggedIn: PropTypes.func.isRequired,
 };
 
-export default LoginView;
+export default connect(mapStateToProps, { setUser, validateInput })(LoginView);
