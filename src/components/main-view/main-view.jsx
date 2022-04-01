@@ -19,7 +19,6 @@ import MoviesList from "../movies-list/movies-list";
 
 let mapStateToProps = (state) => {
   return {
-    movies: state.movies,
     user: state.user,
   };
 };
@@ -130,7 +129,7 @@ const MainView = ({ user }) => {
           />
           <Route
             exact
-            path="/director/:Name"
+            path="/director/:id"
             render={({ match }) => {
               if (!user)
                 return (
@@ -142,11 +141,9 @@ const MainView = ({ user }) => {
               return (
                 <Col md={8}>
                   <DirectorView
-                    director={
-                      movies.find(
-                        (movie) => movie.Director.Name === match.params.name
-                      ).Director
-                    }
+                    director={movies.find(
+                      (movie) => movie.Director.Name === match.params.id
+                    )}
                   />
                 </Col>
               );
@@ -166,11 +163,9 @@ const MainView = ({ user }) => {
               return (
                 <Col md={8}>
                   <GenreView
-                    genre={
-                      movies.find((movie) =>
-                        movie.Genre.includes(match.params.id)
-                      ).Genre
-                    }
+                    movie={movies.find(
+                      (movies) => movies.Genre.Name === match.params.id
+                    )}
                   />
                 </Col>
               );

@@ -30,7 +30,7 @@ const MovieView = ({ movie, onBackClick }) => {
             </div>
             <div className="movie-director">
               <span className="label">Director:</span>
-              <Link to={`/directors/${movie.Director.Name}`}>
+              <Link to={`/director/${movie.Director.Name}`}>
                 <Button variant="link">{movie.Director.Name}</Button>
               </Link>
             </div>

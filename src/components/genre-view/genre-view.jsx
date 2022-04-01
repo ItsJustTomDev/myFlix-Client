@@ -3,7 +3,16 @@ import "./genre-view.scss";
 import PropTypes from "prop-types";
 import { Container, Card, Button } from "react-bootstrap";
 
-function GenreView({ genre, onBackClick }) {
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
+let mapStateToProps = (state) => {
+  return {
+    movies: state.movies,
+  };
+};
+
+function GenreView({ movie }) {
   return (
     <Container>
       <Card>
@@ -11,21 +20,17 @@ function GenreView({ genre, onBackClick }) {
           <Card.Title>Genre</Card.Title>
           <Card.Text>
             <span className="label">Name: </span>
-            <span className="value">{genre.Name}</span>
+            <span className="value">{movie.Genre.Name}</span>
+            {console.log(movie)}
           </Card.Text>
           <Card.Text>
             <span className="label">Description: </span>
-            <span className="value">{genre.Description}</span>
+            <span className="value">{movie.Genre.Description}</span>
           </Card.Text>
 
-          <Button
-            variant="primary"
-            onClick={() => {
-              onBackClick();
-            }}
-          >
-            Back
-          </Button>
+          <Link to="/">
+            <Button variant="primary">Back</Button>
+          </Link>
         </Card.Body>
       </Card>
     </Container>
@@ -39,4 +44,4 @@ GenreView.proptypes = {
   }).isRequired,
 };
 
-export default GenreView;
+export default connect(mapStateToProps)(GenreView);
