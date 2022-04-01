@@ -92,7 +92,7 @@ const MainView = ({ user }) => {
           />
           <Route
             exact
-            path={`/users/${localUser}`}
+            path={`/user`}
             render={() => {
               if (!user) return <Redirect to="/" />;
               return (
